@@ -1,13 +1,17 @@
 // External Dependancies
 const mongoose = require("mongoose");
 
+const teamMemberSchema = new mongoose.Schema(
+  {
+    id: { type: mongoose.Schema.Types.ObjectId },
+    name: { type: String },
+  },
+  { _id: false }
+);
+
 const standupSchema = new mongoose.Schema({
-  teamMember: { type: String },
-  project: { type: String },
+  teamMember: { type: teamMemberSchema },
   workYesterday: { type: String },
-  workToday: { type: String },
-  blockers: { type: String },
-  createdOn: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("Standup", standupSchema);
