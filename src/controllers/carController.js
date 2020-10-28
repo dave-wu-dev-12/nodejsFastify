@@ -5,10 +5,30 @@ const boom = require("boom");
 const Car = require("../models/Car");
 
 // Get all cars
-exports.getCars = async (req, reply) => {
+exports.getAllCars = async (req, reply) => {
   try {
     console.log(req, reply);
     const cars = await Car.find();
+    return cars;
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+};
+
+exports.getAssCars = async (req, reply) => {
+  try {
+    console.log(req, reply);
+    const cars = await Car.find({ title: "ass" }, "title brand");
+    return cars;
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+};
+
+exports.getAllCarTitles = async (req, reply) => {
+  try {
+    console.log(req, reply);
+    const cars = await Car.find({}, "-brand");
     return cars;
   } catch (err) {
     throw boom.boomify(err);
@@ -53,7 +73,7 @@ exports.updateCar = async (req, reply) => {
 exports.deleteCar = async (req, reply) => {
   try {
     const id = req.params.id;
-    const car = await Car.findByIdAndRemove(id);
+    const car = await Car.findByIdAndDelete(id);
     return car;
   } catch (err) {
     throw boom.boomify(err);

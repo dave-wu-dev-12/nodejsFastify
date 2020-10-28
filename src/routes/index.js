@@ -5,7 +5,17 @@ const routes = [
   {
     method: "GET",
     url: "/api/cars",
-    handler: carController.getCars,
+    handler: carController.getAllCars,
+  },
+  {
+    method: "GET",
+    url: "/api/asscars",
+    handler: carController.getAssCars,
+  },
+  {
+    method: "GET",
+    url: "/api/cartitles",
+    handler: carController.getAllCarTitles,
   },
   {
     method: "GET",
