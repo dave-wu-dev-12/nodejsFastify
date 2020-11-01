@@ -14,4 +14,14 @@ const standupSchema = new mongoose.Schema({
   workYesterday: { type: String },
 });
 
-module.exports = mongoose.model("Standup", standupSchema);
+const standupSchemaTwo = new mongoose.Schema({
+  teamMember: {
+    first: String,
+    last: String,
+  },
+  workYesterday: { type: String },
+});
+
+standupSchemaTwo.path("teamMember.first").required(true, "please supply");
+
+module.exports = mongoose.model("Standup", standupSchemaTwo);

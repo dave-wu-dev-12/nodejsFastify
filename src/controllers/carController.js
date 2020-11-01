@@ -17,9 +17,23 @@ exports.getAllCars = async (req, reply) => {
 
 exports.getAssCars = async (req, reply) => {
   try {
-    console.log(req, reply);
-    const cars = await Car.find({ title: "ass" }, "title brand");
-    return cars;
+    // get the query params if any
+    let query = {};
+    let { title, brand } = req.query;
+    if (title) {
+      query.title = title;
+    } else {
+      return reply.status(500).send("title required");
+    }
+
+    if (brand) {
+      query.brand = brand;
+    } else {
+      return reply.status(500).send("brand required");
+    }
+
+    const cars = await Car.find(query, "title brand");
+    return cars.length > 0 ? cars : reply.status(404).send("no data");
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -38,6 +52,7 @@ exports.getAllCarTitles = async (req, reply) => {
 // Get single car by ID
 exports.getSingleCar = async (req, reply) => {
   try {
+    // use the params with the colon
     const id = req.params.id;
     const car = await Car.findById(id);
     return car;
