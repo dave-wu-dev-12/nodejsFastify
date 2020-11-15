@@ -1,17 +1,13 @@
 // External Dependancies
 const mongoose = require("mongoose");
 
-const teamMemberSchema = new mongoose.Schema(
-  {
-    id: { type: mongoose.Schema.Types.ObjectId },
-    name: { type: String },
-  },
-  { _id: false }
-);
+const teamMemberSchema = new mongoose.Schema({
+  name: { type: String },
+});
 
 const standupSchema = new mongoose.Schema({
-  teamMember: { type: teamMemberSchema },
-  workYesterday: { type: String },
+  teamMember: { type: teamMemberSchema, required: true },
+  workYesterday: { type: String, required: true },
 });
 
 const standupSchemaTwo = new mongoose.Schema({
@@ -24,4 +20,4 @@ const standupSchemaTwo = new mongoose.Schema({
 
 standupSchemaTwo.path("teamMember.first").required(true, "please supply");
 
-module.exports = mongoose.model("Standup", standupSchemaTwo);
+module.exports = mongoose.model("Standup", standupSchema);

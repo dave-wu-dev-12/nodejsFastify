@@ -39,31 +39,6 @@ const routes = [
     url: "/api/cars/:id",
     handler: carController.deleteCar,
   },
-  {
-    method: "GET",
-    url: "/api/standups",
-    handler: standupController.getAllStandups,
-  },
-  {
-    method: "GET",
-    url: "/api/standups/:id",
-    handler: standupController.getTeammemberStandups,
-  },
-  {
-    method: "POST",
-    url: "/api/standups",
-    handler: standupController.addStandup,
-  },
-  {
-    method: "POST",
-    url: "/api/teamMember",
-    handler: teamMemberController.addTM,
-  },
-  {
-    method: "GET",
-    url: "/api/teamMember",
-    handler: teamMemberController.getAllTeamMember,
-  },
 ];
 
 module.exports = routes;
