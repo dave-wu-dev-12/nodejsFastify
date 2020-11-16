@@ -12,6 +12,16 @@ const postRoutes = [
     url: "/api/posts",
     handler: postController.addPost,
   },
+  {
+    method: "PUT",
+    url: "/api/posts/:id",
+    handler: postController.updatePost,
+  },
+  {
+    method: "DELETE",
+    url: "/api/posts/:id",
+    handler: postController.deletePost,
+  },
 ];
 
 module.exports = postRoutes;

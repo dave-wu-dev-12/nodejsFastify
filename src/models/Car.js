@@ -6,8 +6,8 @@ const specialWordValidator = function (val) {
 };
 
 const carSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  brand: { type: String, required: true },
+  title: { type: String },
+  brand: { type: String },
 });
 
 const nameSchema = new mongoose.Schema({
@@ -27,4 +27,4 @@ const carNameonlySchema = new mongoose.Schema({
 
 nameSchema.path("last").required(true, "Please supply a last name");
 
-module.exports = mongoose.model("Car", carNameonlySchema);
+module.exports = mongoose.model("Car", carSchema);
