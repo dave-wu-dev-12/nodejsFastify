@@ -40,9 +40,22 @@ exports.deletePost = async (req, reply) => {
   try {
     const id = req.params.id;
     const post = await Post.findByIdAndDelete(id);
-    return post.length > 0
-      ? reply.status(200).send()
-      : reply.status(404).send("unable to delete data");
+    return post;
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+};
+
+exports.addCommentToPost = async (req, reply) => {
+  try {
+    if (!req.body.message || !req.body.name) {
+      reply.status(400).send("comment required");
+    }
+    const id = req.params.id;
+    const post = await Post.findById(id);
+    post.comments.unshift(req.body);
+    post.save();
+    return post;
   } catch (err) {
     throw boom.boomify(err);
   }

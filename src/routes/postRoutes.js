@@ -22,6 +22,11 @@ const postRoutes = [
     url: "/api/posts/:id",
     handler: postController.deletePost,
   },
+  {
+    method: "POST",
+    url: "/api/posts/:id/comment",
+    handler: postController.addCommentToPost,
+  },
 ];
 
 module.exports = postRoutes;
